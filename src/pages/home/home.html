@@ -16,7 +16,28 @@
   <ion-item>
       <h1>Selamat Datang</h1>
   </ion-item>
-  
+  <ion-list radio-group [color]="color" (ionChange)="change()" [(ngModel)]="index">
+      <ion-item>
+        <ion-label>Friends</ion-label>
+        <ion-radio value="0" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Family</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Enemies</ion-label>
+        <ion-radio value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label>Enemies</ion-label>
+          <ion-radio value="3" ></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Enemies</ion-label>
+          <ion-radio value="4" ></ion-radio>
+        </ion-item>
+    </ion-list>
 
   
   <button ion-button [color]="color" block (click)="setColor()">Ubah warna</button>

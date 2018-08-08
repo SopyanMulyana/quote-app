@@ -1,16 +1,31 @@
-import { Component } from '@angular/core';
-import { NavController, ActionSheetController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, ActionSheetController, LoadingController  } from 'ionic-angular';
+import { AppHelper } from "../../app/app.helper";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
-  colors=["primary","secondary","danger","light","dark"];
-  color="primary";
-  constructor(public navCtrl: NavController, public actionsheetCtrl: ActionSheetController) {
+  
+  color;
+  loader;
+  index;
+  constructor(
+    public navCtrl: NavController,
+    public actionsheetCtrl: ActionSheetController,
+    public appHelper: AppHelper,
+    public loadingCtrl: LoadingController
+  ){}
 
+  ngOnInit(){
+    console.log(this.appHelper.currentColor)
+    this.color=this.appHelper.currentColor;
+    this.index = this.appHelper.currentIndex;
+    this.loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
   }
 
   openMenu() {
@@ -46,7 +61,17 @@ export class HomePage {
     actionSheet.present();
   }
   setColor(){
-    this.color = this.colors[2];
+    this.loader.present();
+    this.appHelper.insertCurrentColor(2);
+    this.color=this.appHelper.currentColor;
+    this.loader.dismiss();
+  }
+  
+  change(){
+    let i: number = +this.index;
+    this.appHelper.insertCurrentColor(i);
+    this.color=this.appHelper.currentColor;
+    this.index=this.appHelper.currentIndex;
   }
 
 }
